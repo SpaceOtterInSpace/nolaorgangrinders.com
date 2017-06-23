@@ -15,4 +15,11 @@ class User < ActiveRecord::Base
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+
+  def total_due
+    orders.inject(0){ |sum, order|
+      order.paid? ? sum : sum + order.amount
+    }
+  end
+
 end

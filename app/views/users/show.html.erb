@@ -11,9 +11,27 @@
 </p>
 
 <p>
-  <strong>Password:</strong>
-  <%= @user.password %>
+  <strong>Amount Due:</strong>
+  <%= number_to_currency(@user.total_due/100, :unit => "$") %>
 </p>
 
+  <table>
+    <thead>
+      <tr class="row">
+        <th class="col-md-4">Name</th>
+        <th class="col-md-4">Amount</th>
+        <th class="col-md-4">Due Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user.orders.each do |order| %>
+        <tr class="row">
+          <td class="col-md-4"><%= order.name %></td>
+          <td class="col-md-4"><%= number_to_currency(order.amount/100, :unit => "$") %></td>
+          <td class="col-md-4"><%= order.due_date %></td>
+      <% end %>
+    </tbody>
+  </table>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
