@@ -30,6 +30,8 @@ gem 'sidekiq', '~> 3.3.4'
 # Use ActiveModel has_secure_password
 gem 'bcrypt',         '3.1.11'
 
+gem 'stripe'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -57,4 +59,6 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'dotenv-rails'
 end

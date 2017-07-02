@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :orders do
     resources :payments
   end
+  resources :charges
   get 'sessions/new'
 
   # The priority is based upon order of creation: first created -> highest priority.
