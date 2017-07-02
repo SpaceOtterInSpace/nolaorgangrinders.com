@@ -18,18 +18,22 @@
   <table>
     <thead>
       <tr class="row">
-        <th class="col-md-4">Name</th>
-        <th class="col-md-4">Amount</th>
-        <th class="col-md-4">Due Date</th>
+        <th class="col-md-3">Name</th>
+        <th class="col-md-3">Amount</th>
+        <th class="col-md-3">Due Date</th>
+        <th class="col-md-3">Paid?</th>
+        <th></th>
       </tr>
     </thead>
 
     <tbody>
       <% @user.orders.each do |order| %>
         <tr class="row">
-          <td class="col-md-4"><%= order.name %></td>
-          <td class="col-md-4"><%= number_to_currency(order.amount/100, :unit => "$") %></td>
-          <td class="col-md-4"><%= order.due_date %></td>
+          <td class="col-md-3"><%= order.name %></td>
+          <td class="col-md-3"><%= number_to_currency(order.amount/100, :unit => "$") %></td>
+          <td class="col-md-3"><%= order.due_date %></td>
+          <td class="col-md-3"><%= order.paid? ? 'Yes' : 'No' %></td>
+          <td><%= link_to "pay", new_order_payment_path(order.id), class: "btn btn-primary" %></td>
       <% end %>
     </tbody>
   </table>
