@@ -32,6 +32,8 @@ gem 'bcrypt',         '3.1.11'
 
 gem 'stripe'
 
+gem 'sendgrid-ruby'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

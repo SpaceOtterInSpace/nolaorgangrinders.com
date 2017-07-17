@@ -66,11 +66,13 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :authentication => :plain,
-    :port => ENV['MAILGUN_SMTP_PORT'],
-    :address => ENV['MAILGUN_SMTP_SERVER'],
-    :domain => ENV['MAILGUN_DOMAIN'],
-    :user_name => ENV['MAILGUN_SMTP_LOGIN'],
-    :password => ENV['MAILGUN_SMTP_PASSWORD'],
+    :port => 587,
+    :address => 'smtp.sendgrid.net',
+    :domain => 'nolamonkeys.com',
+    :user_name => ENV['SENDGRID_USERNAME'],
+    :password => ENV['SENDGRID_PASSWORD'],
+    :authentication => :plain,
+    :enable_starttls_auto => true
   }
   host = 'nolamonkeys.com'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
