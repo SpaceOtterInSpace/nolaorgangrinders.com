@@ -26,7 +26,7 @@
       <th class="col-md-3">Name</th>
       <th class="col-md-3">Amount</th>
       <th class="col-md-3">Due Date</th>
-      <th class="col-md-3">Paid?</th>
+      <th class="col-md-3">Amount Paid</th>
     </tr>
   </thead>
 
@@ -36,7 +36,7 @@
         <td class="col-md-3"><%= order.name %></td>
         <td class="col-md-3"><%= number_to_currency(order.amount/100, :unit => "$") %></td>
         <td class="col-md-3"><%= order.due_date %></td>
-        <td class="col-md-3"><%= order.paid? ? 'Yes' : 'No' %></td>
+        <td class="col-md-3"><%= number_to_currency(order.amount_paid/100, :unit => "$") %></td>
       </tr>
     <% end %>
   </tbody>
