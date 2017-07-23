@@ -1,5 +1,6 @@
 class PasswordResetsController < ApplicationController
-  before_action :get_user,   only: [:edit, :update]
+  skip_before_action :require_admin
+  before_action :get_user_by_digest,   only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
 
   def new
@@ -44,6 +45,10 @@ class PasswordResetsController < ApplicationController
 
   def get_user
     @user = User.find_by(email: params[:email])
+  end
+
+  def get_user_by_digest
+    @user = User.find_by(reset_digest: params[:id])
   end
 
   # Checks expiration of reset token.

@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :require_admin, only: [:create, :destroy, :index, :new]
+  skip_before_action :require_admin, only: [:show, :edit]
   before_action :ensure_current_user, only: [:show, :edit]
+
 
   # GET /users
   # GET /users.json

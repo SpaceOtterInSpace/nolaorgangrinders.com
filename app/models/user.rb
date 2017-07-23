@@ -13,13 +13,6 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
 
-  # Returns the hash digest of the given string.
-  def User.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
-  end
-
   def due_now
     total = orders.inject(0){ |sum, order|
       if order.due_date < 1.month.from_now
@@ -50,7 +43,7 @@ class User < ActiveRecord::Base
   # Sets the password reset attributes.
   def create_reset_digest
     self.reset_token = User.new_token
-    update_columns(reset_digest:  User.digest(reset_token), reset_sent_at: Time.zone.now)
+    update_columns(reset_digest:  reset_token, reset_sent_at: Time.zone.now)
   end
 
   # Sends password reset email.
@@ -73,6 +66,6 @@ class User < ActiveRecord::Base
   # Creates and assigns the activation token and digest.
   def create_activation_digest
     self.activation_token  = User.new_token
-    self.activation_digest = User.digest(activation_token)
+    self.activation_digest = activation_token
   end
 end
