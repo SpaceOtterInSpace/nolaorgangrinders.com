@@ -2,11 +2,7 @@ Rails.application.routes.draw do
 
 
   resources :events
-  resources :items
-  resources :payments
-  resources :orders do
-    resources :payments
-  end
+
   resources :charges
   get 'sessions/new'
 
@@ -22,7 +18,10 @@ Rails.application.routes.draw do
   post '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
-  resources :users
+  resources :users do
+    resources :payments
+    resources :orders
+  end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   # Example of regular route:
