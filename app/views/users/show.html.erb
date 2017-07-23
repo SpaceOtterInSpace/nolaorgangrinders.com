@@ -11,7 +11,12 @@
 </p>
 
 <p>
-  <strong>Amount Due:</strong>
+  <strong>Amount Due Today:</strong>
+  <%= number_to_currency(@user.due_now/100, :unit => "$") %>
+</p>
+
+<p>
+  <strong>Total Amount Due:</strong>
   <%= number_to_currency(@user.total_due/100, :unit => "$") %>
 </p>
 
@@ -45,7 +50,7 @@
       </div>
     <% end %>
     <label class="amount">
-      $<input type="text" value="<%= @user.total_due/100 %>" id="amount" name="amount"/>
+      $<input type="text" value="<%= @user.due_now/100 %>" id="amount" name="amount"/>
     </label>
   </article>
   <article>

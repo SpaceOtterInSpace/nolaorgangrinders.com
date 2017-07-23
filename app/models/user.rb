@@ -20,10 +20,26 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end
 
-  def total_due
-    orders.inject(0){ |sum, order|
-      order.paid? ? sum : sum + order.amount
+  def due_now
+    total = orders.inject(0){ |sum, order|
+      if order.due_date < 1.month.from_now
+        sum + order.amount
+      else
+        sum
+      end
     }
+    total - paid < 0 ? 0 : total - paid
+  end
+
+  def total_due
+    total = orders.inject(0){ |sum, order|
+      sum + order.amount
+    }
+    total - paid
+  end
+
+  def paid
+    payments.map(&:amount).sum
   end
 
   # Returns a random token.
