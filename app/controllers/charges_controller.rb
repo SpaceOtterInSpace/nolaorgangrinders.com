@@ -32,6 +32,7 @@ class ChargesController < ApplicationController
       :currency    => 'usd'
     )
     flash[:notice] = "Thanks you paid $ #{number_to_currency(@amount/100, :unit => "$")}."
+    current_user.payments.create :amount => @amount, :charge_id => charge.id
     redirect_to user_path current_user
 
   rescue Stripe::CardError => e
