@@ -11,6 +11,24 @@ class ApplicationController < ActionController::Base
   def require_log_in
     if !logged_in?
       redirect_to login_path
+      return false
+    else
+      return true
     end
   end
+
+  def is_admin_user
+    current_user.isadmin?
+  end
+
+  def require_admin
+    if require_log_in
+      if is_admin_user
+        return true
+      else
+        redirect_to user_path current_user
+      end
+    end
+  end
+
 end
