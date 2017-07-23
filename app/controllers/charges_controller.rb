@@ -1,4 +1,5 @@
 class ChargesController < ApplicationController
+  include ActionView::Helpers::NumberHelper
 
   def new
   end
@@ -30,6 +31,8 @@ class ChargesController < ApplicationController
       :source => params[:stripeToken],
       :currency    => 'usd'
     )
+    flash[:notice] = "Thanks you paid $ #{number_to_currency(@amount/100, :unit => "$")}."
+    redirect_to user_path current_user
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
