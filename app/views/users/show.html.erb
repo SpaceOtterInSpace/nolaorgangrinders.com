@@ -15,27 +15,82 @@
   <%= number_to_currency(@user.total_due/100, :unit => "$") %>
 </p>
 
-  <table>
-    <thead>
+<table>
+  <thead>
+    <tr class="row">
+      <th class="col-md-3">Name</th>
+      <th class="col-md-3">Amount</th>
+      <th class="col-md-3">Due Date</th>
+      <th class="col-md-3">Paid?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.orders.each do |order| %>
       <tr class="row">
-        <th class="col-md-3">Name</th>
-        <th class="col-md-3">Amount</th>
-        <th class="col-md-3">Due Date</th>
-        <th class="col-md-3">Paid?</th>
-        <th></th>
+        <td class="col-md-3"><%= order.name %></td>
+        <td class="col-md-3"><%= number_to_currency(order.amount/100, :unit => "$") %></td>
+        <td class="col-md-3"><%= order.due_date %></td>
+        <td class="col-md-3"><%= order.paid? ? 'Yes' : 'No' %></td>
       </tr>
-    </thead>
+    <% end %>
+  </tbody>
+</table>
 
-    <tbody>
-      <% @user.orders.each do |order| %>
-        <tr class="row">
-          <td class="col-md-3"><%= order.name %></td>
-          <td class="col-md-3"><%= number_to_currency(order.amount/100, :unit => "$") %></td>
-          <td class="col-md-3"><%= order.due_date %></td>
-          <td class="col-md-3"><%= order.paid? ? 'Yes' : 'No' %></td>
-          <td><%= link_to "pay", new_order_payment_path(order.id), class: "btn btn-primary" %></td>
-      <% end %>
-    </tbody>
-  </table>
+<%= form_tag charges_path, id: "payment_form" do %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+    <label class="amount">
+      $<input type="text" value="<%= @user.total_due/100 %>" id="amount" name="amount"/>
+    </label>
+  </article>
+  <article>
+    <%= hidden_field_tag(:stripeToken) %>
+  </article>
+  <button id='payButton'>Pay Dues</button>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<% end %>
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<script>
+var handler = StripeCheckout.configure({
+  key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+  locale: 'auto',
+  name: 'Organ Grinders Dues',
+  description: '<%= @user.name %>',
+  token: function(token) {
+    $('input#stripeToken').val(token.id);
+    $('form#payment_form').submit();
+  }
+});
+
+$('#payButton').on('click', function(e) {
+  e.preventDefault();
+
+  $('#error_explanation').html('');
+
+  var amount = $('input#amount').val();
+  amount = amount.replace(/\$/g, '').replace(/\,/g, '')
+
+  amount = parseFloat(amount);
+
+  if (isNaN(amount)) {
+    $('#error_explanation').html('<p>Please enter a valid amount in USD ($).</p>');
+  }
+  else if (amount < 20.00) {
+    $('#error_explanation').html('<p>Donation amount must be at least $20.</p>');
+  }
+  else {
+    amount = amount * 100; // Needs to be an integer!
+    handler.open({
+      amount: Math.round(amount),
+      email: '<%= @user.email %>'
+    })
+  }
+});
+</script>
