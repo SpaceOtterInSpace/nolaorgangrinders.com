@@ -52,6 +52,7 @@
           <p><%= flash[:error] %></p>
         </div>
       <% end %>
+      <h6>Minimum payment: $20</h6>
       <label class="amount">
         $<input type="text" value="<%= @user.due_now/100 %>" id="amount" name="amount"/>
       </label>
