@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password_digest, presence: true, length: { minimum: 6 }
 
   def due_now
     total = orders.inject(0){ |sum, order|
