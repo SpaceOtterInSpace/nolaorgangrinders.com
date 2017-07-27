@@ -25,11 +25,12 @@
           <li><%= link_to "Log in", login_path %></li>
         <% end %>
       </ul>
+
     </nav>
   </div>
 </header>
 <% if flash[:notice] %>
-  <div class="alert alert-danger">
+  <div class="alert alert-success">
     <%= flash[:notice] %>
   </div>
 <% end %>
