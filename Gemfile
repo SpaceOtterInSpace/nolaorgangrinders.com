@@ -43,6 +43,7 @@ gem 'sendgrid-ruby'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'rails_12factor'
+gem 'sentry-raven'
 group :development, :test do
 
   # Automatically & intelligently launch tests with the minitest framework when

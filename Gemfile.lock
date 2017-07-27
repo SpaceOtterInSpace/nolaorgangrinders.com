@@ -177,6 +177,8 @@ GEM
     sendgrid-ruby (5.0.0)
       ruby_http_client (~> 3.0)
       sinatra (>= 1.4.7, < 3)
+    sentry-raven (2.6.0)
+      faraday (>= 0.7.6, < 1.0)
     shellany (0.0.1)
     sidekiq (3.3.4)
       celluloid (>= 0.16.0)
@@ -236,6 +238,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sendgrid-ruby
+  sentry-raven
   sidekiq (~> 3.3.4)
   spring
   stripe
