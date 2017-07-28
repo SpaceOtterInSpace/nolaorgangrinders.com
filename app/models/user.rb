@@ -35,6 +35,14 @@ class User < ActiveRecord::Base
     payments.map(&:amount).sum
   end
 
+  def format_paid
+    if (paid.nil?)
+      0
+    else
+      "$" + (paid/100).to_s
+    end
+  end
+
   # Returns a random token.
   def User.new_token
     SecureRandom.urlsafe_base64
