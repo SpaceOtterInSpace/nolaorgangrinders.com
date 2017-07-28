@@ -1,3 +1,6 @@
+# Tests
+1. run `script/test test/controllers/sessions_controller_test.rb`
+
 # Example of a Rails App with Docker Compose for development
 
 This is an example of how I use [Docker](https://docs.docker.com/) and
