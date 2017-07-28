@@ -74,7 +74,7 @@
 
 <script>
 var handler = StripeCheckout.configure({
-  key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+  key: '<%= Rails.configuration.stripe[:stripe_publishable_key] %>',
   locale: 'auto',
   name: 'Organ Grinders Dues',
   description: '<%= @user.name %>',
