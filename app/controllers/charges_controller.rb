@@ -1,5 +1,6 @@
 class ChargesController < ApplicationController
   include ActionView::Helpers::NumberHelper
+  skip_before_action :require_admin
 
   def new
   end

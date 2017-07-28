@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
+  skip_before_action :require_admin
 
   # GET /payments
   # GET /payments.json
