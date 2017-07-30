@@ -37,7 +37,7 @@
   </thead>
 
   <tbody>
-    <% @user.orders.each do |order| %>
+    <% @user.orders.sort_by { |order| order.due_date }.each do |order| %>
       <tr class="row">
         <td class="col-md-3"><%= order.name %></td>
         <td class="col-md-3"><%= number_to_currency(order.amount/100, :unit => "$") %></td>
