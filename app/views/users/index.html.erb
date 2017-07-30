@@ -7,6 +7,7 @@
       <div class="col-md-2">Name</div>
       <div class="col-md-2">Email</div>
       <div class="col-md-2">Amount Paid</div>
+      <div class="col-md-2">Current Due</div>
       <div class="col-md-2">Is Admin</div>
       <div class="col-md-2">Actions</div>
     </div>
@@ -16,6 +17,7 @@
         <div class="col-md-2"><%= user.name %></div>
         <div class="col-md-2"><%= user.email %></div>
         <div class="col-md-2"><%= user.format_paid %></div>
+        <div class="col-md-2"><%= user.format_due %></div>
         <div class="col-md-2"><%= user.isadmin? ? "Yes" : "No" %></div>
         <div class="col-md-1"><%= link_to 'Show', user %></div>
         <div class="col-md-1"><%= link_to 'Edit', edit_user_path(user) %></div>

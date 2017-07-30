@@ -43,6 +43,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def format_due
+    if (due_now.nil?)
+      0
+    else
+      "$" + (due_now/100).to_s
+    end
+  end
+
   # Returns a random token.
   def User.new_token
     SecureRandom.urlsafe_base64
