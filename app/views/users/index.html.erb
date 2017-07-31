@@ -2,6 +2,19 @@
 
 <h1>Listing Users</h1>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      Amount Collected
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <%= number_to_currency(@money_collected/100, :unit => "$") %>
+    </div>
+  </div>
+</div>
+
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-2">Name</div>

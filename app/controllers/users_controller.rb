@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all.order('name ASC')
+    @money_collected = User.money_collected
   end
 
   # GET /users/1

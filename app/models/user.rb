@@ -51,6 +51,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.money_collected
+    all.inject(0){|sum, user| sum + user.paid}
+  end
+
   # Returns a random token.
   def User.new_token
     SecureRandom.urlsafe_base64
