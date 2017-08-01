@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   def due_now
     total = orders.inject(0){ |sum, order|
-      if order.due_date < 1.month.from_now
+      if order.due_date < 20.days.from_now
         sum + order.amount
       else
         sum
