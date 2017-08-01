@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+
+  namespace :admin do
+    resources :users
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
