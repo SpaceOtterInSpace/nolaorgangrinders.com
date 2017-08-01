@@ -1,26 +1,28 @@
 <p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @user.name %>
 </p>
-
 <p>
   <strong>Notes:</strong>
   <%= @user.note %>
 </p>
-
-
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
-
+<p>
+  <strong>Address:</strong>
+  <%= @user.address %>
+</p>
+<p>
+  <strong>Phone:</strong>
+  <%= @user.phone %>
+</p>
 <p>
   <strong>Amount Due Today:</strong>
   <%= number_to_currency(@user.due_now/100, :unit => "$") %>
 </p>
-
 <p>
   <strong>Total Amount Due:</strong>
   <%= number_to_currency(@user.total_due/100, :unit => "$") %>
