@@ -6,9 +6,6 @@ class StaticPagesController < ApplicationController
     end
   end
 
-  def about
-  end
-
   def checkin
   end
 end

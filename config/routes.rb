@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'static_pages#home'
 
-  get '/about',   to: 'static_pages#about'
   get '/checkin',   to: 'static_pages#checkin'
   get '/signup',  to: 'users#new'
   get '/login',   to: 'sessions#new'
