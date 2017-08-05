@@ -1,0 +1,5 @@
+class AddIsDancerToUsers < ActiveRecord::Migration
+  def change
+    add_column :users, :is_dancer, :boolean
+  end
+end
