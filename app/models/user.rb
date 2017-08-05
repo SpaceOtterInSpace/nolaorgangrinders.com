@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     total - paid < 0 ? 0 : total - paid
   end
 
+  def paid_up?
+    return due_now == 0
+  end
+
   def total_due
     total = orders.inject(0){ |sum, order|
       sum + order.amount
