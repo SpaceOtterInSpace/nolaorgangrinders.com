@@ -1,7 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :require_admin, only: [:show, :edit, :update]
-  before_action :ensure_current_user, only: [:show, :edit]
+  before_action  only: [:show, :edit]
 
 
   # GET /users
@@ -46,7 +45,7 @@ class Admin::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to admin_users_path, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -73,13 +72,7 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password)
-    end
-
-    def ensure_current_user
-      unless current_user == @user || is_admin_user
-        redirect_to user_path current_user
-      end
+      params.require(:user).permit(:name, :email, :password, :isadmin, :address, :phone, :notes)
     end
 
 
