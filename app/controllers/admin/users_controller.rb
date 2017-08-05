@@ -6,7 +6,7 @@ class Admin::UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all.order('name ASC')
+    @users = User.active.all.order('name ASC')
     @money_collected = User.money_collected
   end
 
@@ -72,7 +72,7 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :isadmin, :address, :phone, :notes)
+      params.require(:user).permit(:name, :email, :password, :isadmin, :address, :phone, :notes, :active)
     end
 
 

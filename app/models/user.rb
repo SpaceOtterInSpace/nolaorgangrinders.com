@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password_digest, presence: true, length: { minimum: 6 }
+  scope :active, -> { where(active: true) }
 
   def due_now
     total = orders.inject(0){ |sum, order|
