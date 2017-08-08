@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   skip_before_action :require_admin, :only => [:new, :create, :destroy]
-  before_action :redirect_if_logged_in
 
   def new
   end
@@ -19,11 +18,5 @@ class SessionsController < ApplicationController
   def destroy
     log_out
     redirect_to root_url
-  end
-
-  def redirect_if_logged_in
-    if current_user
-      redirect_to current_user
-    end
   end
 end
