@@ -3,6 +3,9 @@
     <%= link_to "Organ Grinders", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          <%= link_to "Directions", directions_path %>
+        </li>
         <% if logged_in? %>
           <% if is_admin? %>
           <li class="dropdown">

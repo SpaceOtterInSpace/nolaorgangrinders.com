@@ -8,4 +8,7 @@ class StaticPagesController < ApplicationController
 
   def checkin
   end
+
+  def directions
+  end
 end

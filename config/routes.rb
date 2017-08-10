@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
 
   get '/checkin',   to: 'static_pages#checkin'
+  get '/directions',   to: 'static_pages#directions'
   get '/signup',  to: 'users#new'
   get '/login',   to: 'sessions#new'
   post '/login',   to: 'sessions#create'
