@@ -29,6 +29,17 @@ class User < ActiveRecord::Base
     return due_now == 0
   end
 
+  def overdue
+    owed = orders.inject(0){ |sum, order|
+      if order.due_date < Time.now
+        sum + order.amount
+      else
+        sum
+      end
+    }
+    [owed - paid, 0].max
+  end
+
   def total_due
     total = orders.inject(0){ |sum, order|
       sum + order.amount

@@ -19,20 +19,20 @@
     <div class="row">
       <div class="col-md-1">Actions</div>
       <div class="col-md-2">Name</div>
-      <div class="col-md-2">Email</div>
-      <div class="col-md-2">Paid Up?</div>
-      <div class="col-md-2">Dancer?</div>
-      <div class="col-md-2">Spanker?</div>
+      <div class="col-md-3">Email</div>
+      <div class="col-md-1">Overdue</div>
+      <div class="col-md-1">Dancer?</div>
+      <div class="col-md-1">Spanker?</div>
     </div>
 
     <% @users.each do |user| %>
       <div class="row">
         <div class="col-md-1"><%= link_to 'Edit', edit_admin_user_path(user) %></div>
         <div class="col-md-2"><%= link_to  user.name, admin_user_path(user) %></div>
-        <div class="col-md-2"><%= user.email %></div>
-        <div class="col-md-2"><%= user.paid_up? ? "Yes" : "" %></div>
-        <div class="col-md-2"><%= user.is_dancer? ? "Yes" : "" %></div>
-        <div class="col-md-2"><%= user.is_spanker? ? "Yes" : "" %></div>
+        <div class="col-md-3"><%= user.email %></div>
+        <div class="col-md-1"><%= number_to_currency(user.overdue/100, :unit => "$") %></div>
+        <div class="col-md-1"><%= user.is_dancer? ? "Yes" : "" %></div>
+        <div class="col-md-1"><%= user.is_spanker? ? "Yes" : "" %></div>
       </div>
     <% end %>
   </div>
