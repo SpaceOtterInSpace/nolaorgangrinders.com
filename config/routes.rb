@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get '/checkin',   to: 'static_pages#checkin'
   get '/directions',   to: 'static_pages#directions'
+  get '/dances',   to: 'static_pages#dances'
   get '/signup',  to: 'users#new'
   get '/login',   to: 'sessions#new'
   post '/login',   to: 'sessions#create'

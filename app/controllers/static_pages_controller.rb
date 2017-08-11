@@ -11,4 +11,10 @@ class StaticPagesController < ApplicationController
 
   def directions
   end
+
+  def dances
+    unless logged_in?
+      redirect_to root_path
+    end
+  end
 end
